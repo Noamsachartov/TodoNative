@@ -55,7 +55,7 @@ class Category extends Component{
 
     render(){
         const { navigation } = this.props;
-
+//asd
         var Category_List = '';
         if (this.state.Get_Category.length > 0){
             console.log(this.state.Get_Category, "return")
