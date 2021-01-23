@@ -7,7 +7,7 @@ import MainTab from './assets/Commponents/HomeSection/MainTab';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+//sdsd
 
 const Stack = createStackNavigator();
 export default function App() {
