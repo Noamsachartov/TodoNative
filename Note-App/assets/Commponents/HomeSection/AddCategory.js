@@ -19,25 +19,57 @@ const windowHeight = Dimensions.get('window').height;
 class AddCategory extends Component {
   state = {
     Title: '',
-    Category_list: []
+    // Category_list: []
   }
 
   HandlePost =() =>{
-      console.log(this.state.Title+"dfgdfg");
-      this.setState({Category_list: this.state.Category_list.push(this.state.Title)})
-      _storeData = async () => {
-        try {
-          await AsyncStorage.setItem(
-            '@CategoryList:key',JSON.stringify(this.state.Category_list)
-            
-          );console.log("added")
-        } catch (error) {
-          // Error saving data
-          console.log("errorr")
-        }
-      };
+    var new_category = {
+      "name": this.state.Title
+    }
+    var joined = this.state.Category_list.concat(new_category);
+    this.setState({Category_list: joined})
+    console.log(this.state.Category_list)
+  
+    this.save();
+    // this.clearAsyncStorage();
   }
 
+
+ 
+
+clearAsyncStorage = async() => {
+AsyncStorage.clear();
+}
+
+
+save = async () => {
+try {
+  // await AsyncStorage.setItem("CategoryList", '')
+  await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
+  console.log("saved");
+}catch (error){
+  alert(error)
+}
+}
+
+  componentDidMount() {
+    this.Load();
+}
+
+Load = async () => {
+  try{
+      let Category = await AsyncStorage.getItem("CategoryList");
+      if (Category !== null){
+          console.log(JSON.parse(Category),"from category");
+          this.setState({Category_list: JSON.parse(Category)})
+      }else{
+        this.setState({Category_list: []});
+      }
+    
+  } catch (error){
+      alert(err);
+  }
+}
  render() {
     const { navigation } = this.props;
     return ( <View>
