@@ -4,7 +4,7 @@ import { StyleSheet, Text, View,ScrollView, TouchableOpacity,Modal } from 'react
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo'
 import NoteModal from './ModalNote';
-
+import { FlatList } from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -22,8 +22,26 @@ class Note extends Component{
         })
     }
 
-    render(){
 
+
+    
+    _renderItem = ({item, index}) => {
+      console.log(item.Title)
+      console.log(item.Description)
+      return (
+        <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
+             <Text style={styles.Note_Title}>{item.Title}</Text>
+             <Text style={styles.Note_Description}>{item.Description}</Text>
+             <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+        </View>
+      )
+    }
+
+
+
+
+    render(){
+      console.log("noteeeee")
         return (
         <View>
              {/* SetMOdal */}
@@ -46,16 +64,11 @@ class Note extends Component{
             <View style={styles.container}>
                 <ScrollView Style={{flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' }}>
                     <View style={{flex: 1, flexDirection: 'column', marginBottom: 10}}>
-                            <View style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
-                                <Text style={styles.Note_Title}>Note Title</Text>
-                                <Text style={styles.Note_Description}>Go home and do the assignment, after this call to your team and update then about the result</Text>
-                                <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-                            </View>
-                            <View style={{width: windowWidth -10, height: 150 , marginHorizontal: 5, borderRadius:15 , backgroundColor: '#ccddee'}}>
-                                <Text style={styles.Note_Title}>Note Title</Text>
-                                <Text style={styles.Note_Description}>Go home and do the assignment, after this call to your team and update then about the result</Text>
-                                <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-                            </View>            
+                      <FlatList 
+                            data={this.props.Data}
+                            renderItem={this._renderItem}
+                            keyExtractor={(item,index) => index.toString()}                  
+                        />    
                     </View>
                 </ScrollView>
             <StatusBar style="auto" />
@@ -104,3 +117,38 @@ const styles = StyleSheet.create({
       elevation: 5,
     }
   });
+
+
+
+  // <View style={styles.container}>
+  //               <ScrollView Style={{flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' }}>
+  //                   <View style={{flex: 1, flexDirection: 'column', marginBottom: 10}}>
+  //                           <View style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
+  //                               <Text style={styles.Note_Title}>Note Title</Text>
+  //                               <Text style={styles.Note_Description}>Go home and do the assignment, after this call to your team and update then about the result</Text>
+  //                               <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+  //                           </View>
+  //                           {/* <FlatList 
+  //                         data={this.state.Get_Note}
+  //                         renderItem={this._renderItem}
+  //                         keyExtractor={(item,index) => index.toString()}                  
+  //                     />     */}
+  //                           <View style={{width: windowWidth -10, height: 150 , marginHorizontal: 5, borderRadius:15 , backgroundColor: '#ccddee'}}>
+  //                               <Text style={styles.Note_Title}>Note Title</Text>
+  //                               <Text style={styles.Note_Description}>Go home and do the assignment, after this call to your team and update then about the result</Text>
+  //                               <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+  //                           </View>            
+  //                   </View>
+  //               </ScrollView>
+  //           <StatusBar style="auto" />
+  //           </View>
+
+
+
+
+
+
+
+
+
+  

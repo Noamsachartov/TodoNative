@@ -43,7 +43,7 @@ class Category extends Component{
         const { navigation } = this.props;
         return (
 
-            <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory')}>
+            <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
                              <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c'}}>
                                  <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
                                  <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
@@ -55,7 +55,7 @@ class Category extends Component{
 
     render(){
         const { navigation } = this.props;
-//asd
+
         var Category_List = '';
         if (this.state.Get_Category.length > 0){
             console.log(this.state.Get_Category, "return")
