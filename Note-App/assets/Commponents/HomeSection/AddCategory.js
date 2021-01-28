@@ -23,14 +23,18 @@ class AddCategory extends Component {
   }
 
   HandlePost =() =>{
+    console.log("try post")
     var new_category = {
       "name": this.state.Title
     }
     var joined = this.state.Category_list.concat(new_category);
+    console.log("-------")
+    console.log(joined);
+    console.log("--------")
     this.setState({Category_list: joined})
     console.log(this.state.Category_list)
   
-    this.save();
+    this.save(joined);
     // this.clearAsyncStorage();
   }
 
@@ -42,10 +46,13 @@ AsyncStorage.clear();
 }
 
 
-save = async () => {
+save = async (joined) => {
   try {
     // await AsyncStorage.setItem("CategoryList", '')
-    await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
+    // await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
+    console.log(joined,"---------$$")
+    await AsyncStorage.setItem("CategoryList", JSON.stringify(joined))
+
     console.log("saved");
   }catch (error){
       alert(error)

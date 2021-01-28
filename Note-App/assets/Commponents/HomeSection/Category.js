@@ -44,7 +44,7 @@ class Category extends Component{
         return (
 
             <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
-                             <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c'}}>
+                             <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10                                                }}>
                                  <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
                                  <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
                              </View>

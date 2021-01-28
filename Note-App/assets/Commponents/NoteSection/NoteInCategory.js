@@ -3,7 +3,7 @@ import React , { Component, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableHighlight, Button  } from 'react-native';
 import Note from './Note';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native';
@@ -16,20 +16,30 @@ const windowHeight = Dimensions.get('window').height;
 class NoteInCategory extends Component{
   state = {
     Get_Note: [],
-    CategoryName: ''
+    CategoryName: '',
+    Title: '',
+    Description: ''
   }
 
     Add_Note = () => {
         console.log("Add Note")
-        this.save();
+        var new_note = {
+            Title: this.state.Title,
+            Description: this.state.Description
+        }
+        var joined = this.state.Get_Note.concat(new_note);
+        this.setState({Get_Note: joined})
+        
+        this.setState({Title: '', Description: ''})
+        this.save(joined);
 
     }
 
     
 
     componentDidMount() {
-      // this.setState({CategoryName: this.props.route.params.name})    
-      this.setState({CategoryName: "school"})
+      this.setState({CategoryName: this.props.route.params.name})    
+      // this.setState({CategoryName: "school"})
 
       // this.removeItemValue();
       
@@ -47,13 +57,14 @@ class NoteInCategory extends Component{
 }
 
 
-  save = async () => {
-    var new_note = [{
-      Title: "home diy",
-      Description: "bla bla bla bla bla bla"
-    }]
+  save = async (joined) => {
+    // var new_note = [{
+    //   Title: "home diy",
+    //   Description: "bla bla bla bla bla bla"
+    // }]
     try {
-      await AsyncStorage.setItem("school", JSON.stringify(new_note))
+      var name = `${this.props.route.params.name}`;
+      await AsyncStorage.setItem(name, JSON.stringify(joined))
       console.log("New Item saved");
     }catch (error){
       alert(error)
@@ -66,8 +77,8 @@ class NoteInCategory extends Component{
    
       try{
         console.log("tryyy")
-          // let Category_note = await AsyncStorage.getItem(this.props.route.params.name);
-          let Category_note = await AsyncStorage.getItem("school");
+          var name = `${this.props.route.params.name}`;
+          let Category_note = await AsyncStorage.getItem(name);
 
           if (Category_note !== null){
               console.log(JSON.parse(Category_note),"from category");
@@ -90,11 +101,25 @@ class NoteInCategory extends Component{
         <View>
             <ScrollView showsVerticalScrollIndicator ={false}>
             <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
-            <TouchableHighlight>
-                  <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
-            </TouchableHighlight >
-                <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>Category Name</Text>
+           
+                <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>{this.state.CategoryName} Notes</Text>
                 <Note Data={this.state.Get_Note} />
+
+                <TouchableHighlight>
+                  <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
+                </TouchableHighlight >
+                <TextInput
+                  placeholder="Type here New Title Item!"
+                  onChangeText={(Title) => this.setState({Title})}
+                  value={this.state.Title}
+                  contentSize={100, 100}
+                />
+                <TextInput
+                  placeholder="Type here New Description!"
+                  onChangeText={(Description) => this.setState({Description})}
+                  value={this.state.Description}
+                  contentSize={100, 100}
+                />
             </View>
             
             </ScrollView> 
