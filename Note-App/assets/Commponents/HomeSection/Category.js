@@ -39,7 +39,7 @@ class Category extends Component{
         }
     }
 
-    _renderItem = ({item, index}) => {
+    renderItem = ({item, index}) => {
         const { navigation } = this.props;
         return (
 
@@ -56,27 +56,16 @@ class Category extends Component{
     render(){
         const { navigation } = this.props;
 
-        var Category_List = '';
         if (this.state.Get_Category.length > 0){
             console.log(this.state.Get_Category, "return")
-            var Category_List = this.state.Get_Category.map((item,index) => {
-                return (<TouchableOpacity name={item.Title} CategoryId={item.Id} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory')}>
-                            <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c'}}>
-                                <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.Title}</Text>
-                                <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-                            </View>
-                        </TouchableOpacity>)
-            });
 
             return(
                 <View style={styles.container}>
                     <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
                         <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
-                            {/* {Category_List} */}
-                 
                              <FlatList 
                                 data={this.state.Get_Category}
-                                renderItem={this._renderItem}
+                                renderItem={this.renderItem}
                                 keyExtractor={(item,index) => index.toString()}
                                 numColumns={2}                   
                             />    
@@ -85,7 +74,6 @@ class Category extends Component{
                 <StatusBar style="auto" />
                 </View>
             )
-
         }
 
         else {

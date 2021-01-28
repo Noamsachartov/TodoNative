@@ -30,15 +30,28 @@ class NoteInCategory extends Component{
     componentDidMount() {
       // this.setState({CategoryName: this.props.route.params.name})    
       this.setState({CategoryName: "school"})
+
+      // this.removeItemValue();
+      
       this.Load();
   }
 
+  async removeItemValue() {
+    try {
+        await AsyncStorage.removeItem("school");
+        return true;
+    }
+    catch(exception) {
+        return false;
+    }
+}
+
 
   save = async () => {
-    var new_note = {
+    var new_note = [{
       Title: "home diy",
       Description: "bla bla bla bla bla bla"
-    }
+    }]
     try {
       await AsyncStorage.setItem("school", JSON.stringify(new_note))
       console.log("New Item saved");
@@ -66,21 +79,11 @@ class NoteInCategory extends Component{
   }
 
 
-
-
-    _renderItem = ({item, index}) => {
-      console.log(item.Title)
-      console.log(item.Description)
-      return (
-        <Note Title={item.Title} Description={item.Description} key={index}/>
-      )
-    }
-
   render(){
     
     console.log(this.state.CategoryName)
 
-    if(!this.state.Get_Note.length){
+    if(this.state.Get_Note){
       console.log("there is data")
 
       return (
@@ -93,6 +96,7 @@ class NoteInCategory extends Component{
                 <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>Category Name</Text>
                 <Note Data={this.state.Get_Note} />
             </View>
+            
             </ScrollView> 
     </View>
   );}

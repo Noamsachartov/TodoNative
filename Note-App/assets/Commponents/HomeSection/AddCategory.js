@@ -43,14 +43,14 @@ AsyncStorage.clear();
 
 
 save = async () => {
-try {
-  // await AsyncStorage.setItem("CategoryList", '')
-  await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
-  console.log("saved");
-}catch (error){
-  alert(error)
-}
-}
+  try {
+    // await AsyncStorage.setItem("CategoryList", '')
+    await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
+    console.log("saved");
+  }catch (error){
+      alert(error)
+    }
+  }
 
   componentDidMount() {
     this.Load();
@@ -70,6 +70,7 @@ Load = async () => {
       alert(err);
   }
 }
+
  render() {
     const { navigation } = this.props;
     return ( <View>
@@ -89,10 +90,7 @@ Load = async () => {
                             <Text style={styles.appButtonText} >Add Crategory</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
-
-
         </View> 
     )
   }

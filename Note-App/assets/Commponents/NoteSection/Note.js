@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{Component} from 'react';
-import { StyleSheet, Text, View,ScrollView, TouchableOpacity,Modal } from 'react-native';
+import { StyleSheet, Text, View,ScrollView,SafeAreaView , TouchableOpacity,Modal,FlatList } from 'react-native';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo'
 import NoteModal from './ModalNote';
-import { FlatList } from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -23,11 +22,13 @@ class Note extends Component{
     }
 
 
+    componentDidMount() {
+      this.setState({Items_Data: this.props.Data})
+  }
 
     
-    _renderItem = ({item, index}) => {
-      console.log(item.Title)
-      console.log(item.Description)
+    renderItem = ({item, index}) => {
+      console.log("render")
       return (
         <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
              <Text style={styles.Note_Title}>{item.Title}</Text>
@@ -41,7 +42,8 @@ class Note extends Component{
 
 
     render(){
-      console.log("noteeeee")
+      if(this.props.Data){
+        console.log("inside")
         return (
         <View>
              {/* SetMOdal */}
@@ -62,19 +64,27 @@ class Note extends Component{
             </Modal>
              {/* End Modal */}
             <View style={styles.container}>
-                <ScrollView Style={{flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' }}>
+                <SafeAreaView  Style={{flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' }}>
                     <View style={{flex: 1, flexDirection: 'column', marginBottom: 10}}>
                       <FlatList 
                             data={this.props.Data}
-                            renderItem={this._renderItem}
-                            keyExtractor={(item,index) => index.toString()}                  
+                            renderItem={this.renderItem}
+                            keyExtractor={item => item.id}                  
                         />    
                     </View>
-                </ScrollView>
+                </SafeAreaView >
             <StatusBar style="auto" />
             </View>
         </View>  
         )
+      }else {
+        return (
+          <View>
+            <Text>Empty</Text>
+            <StatusBar style="auto" />
+            </View>
+        )
+      }
     }
 }
 
