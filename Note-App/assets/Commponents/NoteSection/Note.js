@@ -12,13 +12,16 @@ class Note extends Component{
     state = {
         modalVisible: false,
         setModalVisible : false,
-        modalComponent : ''
+        modalComponent : '',
+        Delete_Name: ''
     }
 
-    setModalVisible = () =>{
+    setModalVisible = (name) =>{
         this.setState({
-            modalVisible : !this.state.modalVisible 
+            modalVisible : !this.state.modalVisible,
+            Delete_Name: name
         })
+        console.log("from modal",name)
     }
 
 
@@ -28,12 +31,13 @@ class Note extends Component{
 
     
     renderItem = ({item, index}) => {
+      var name = item.name
       console.log("render")
       return (
         <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
              <Text style={styles.Note_Title}>{item.Title}</Text>
              <Text style={styles.Note_Description}>{item.Description}</Text>
-             <Icon onPress={this.setModalVisible} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+             <Icon onPress={() => this.setModalVisible(item.Title)} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
         </View>
       )
     }
@@ -57,7 +61,8 @@ class Note extends Component{
                 <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                 <NoteModal
-                         modalVisible={() => this.setModalVisible()}
+                         modalVisible={() => this.setModalVisible(this.state.Delete_Name)}
+                         Delete_Name={this.state.Delete_Name}
                          />
                 </View>
                 </View>

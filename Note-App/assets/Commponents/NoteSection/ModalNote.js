@@ -26,6 +26,7 @@ class DiscountModal extends Component {
   }
 
   DeleteNote = () =>{
+    console.log(this.props.Delete_Name, "from insideee")
     this.props.modalVisible(false)
   }
 

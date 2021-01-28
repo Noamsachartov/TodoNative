@@ -135,7 +135,21 @@ class NoteInCategory extends Component{
             <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
       </TouchableHighlight >
           <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>Category Name</Text>
-          {/* <Note /> */}
+          <TouchableHighlight>
+                  <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
+                </TouchableHighlight >
+                <TextInput
+                  placeholder="Type here New Title Item!"
+                  onChangeText={(Title) => this.setState({Title})}
+                  value={this.state.Title}
+                  contentSize={100, 100}
+                />
+                <TextInput
+                  placeholder="Type here New Description!"
+                  onChangeText={(Description) => this.setState({Description})}
+                  value={this.state.Description}
+                  contentSize={100, 100}
+                />
       </View>
       </ScrollView> 
 </View>
