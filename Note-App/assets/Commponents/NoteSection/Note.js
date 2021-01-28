@@ -63,6 +63,7 @@ class Note extends Component{
                 <NoteModal
                          modalVisible={() => this.setModalVisible(this.state.Delete_Name)}
                          Delete_Name={this.state.Delete_Name}
+                         CategoryName={this.props.CategoryName}
                          />
                 </View>
                 </View>

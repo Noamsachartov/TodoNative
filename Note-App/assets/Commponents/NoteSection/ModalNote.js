@@ -27,8 +27,40 @@ class DiscountModal extends Component {
 
   DeleteNote = () =>{
     console.log(this.props.Delete_Name, "from insideee")
+    // this.Load(this.props.Delete_Name)
+    console.log("trydelete")
     this.props.modalVisible(false)
   }
+
+
+  Load = async (name) => {
+    try{
+      console.log("tr333",name)
+      var category = this.props.CategoryName
+      console.log(category,"!!!!")
+        let Category_note = await AsyncStorage.getItem(category);
+
+        if (Category_note !== null){
+            console.log(JSON.parse(Category_note),"from Modal");
+            this.setState({Get_Note: JSON.parse(Category_note)})
+            var filterd_list = Category_note.filter(item => item.Title != name)
+            console.log("---filterd---",filterd_list)
+            this.save(filterd_list)
+        }
+    } catch (error){
+        alert(err);
+    }
+}
+
+save = async (joined) => {
+  try {
+    var name = `${this.props.CategoryName}`;
+    await AsyncStorage.setItem(name, JSON.stringify(joined))
+    console.log("after filterd");
+  }catch (error){
+    alert(error)
+  }
+}
 
  render() {
 
