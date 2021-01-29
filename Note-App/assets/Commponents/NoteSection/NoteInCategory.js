@@ -44,30 +44,13 @@ class NoteInCategory extends Component{
     
 
     componentDidMount() {
-      this.setState({CategoryName: this.props.route.params.name})    
-      // this.setState({CategoryName: "school"})
-
-      // this.removeItemValue();
-      
+      this.setState({CategoryName: this.props.route.params.name})          
       this.Load();
   }
 
-  async removeItemValue() {
-    try {
-        await AsyncStorage.removeItem("school");
-        return true;
-    }
-    catch(exception) {
-        return false;
-    }
-}
 
 
   save = async (joined) => {
-    // var new_note = [{
-    //   Title: "home diy",
-    //   Description: "bla bla bla bla bla bla"
-    // }]
     try {
       var name = `${this.props.route.params.name}`;
       await AsyncStorage.setItem(name, JSON.stringify(joined))
@@ -82,7 +65,6 @@ class NoteInCategory extends Component{
   Load = async () => {
    
       try{
-        console.log("tryyy")
           var name = `${this.props.route.params.name}`;
           let Category_note = await AsyncStorage.getItem(name);
 
