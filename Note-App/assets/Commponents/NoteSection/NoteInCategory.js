@@ -23,15 +23,21 @@ class NoteInCategory extends Component{
 
     Add_Note = () => {
         console.log("Add Note")
-        var new_note = {
+        if(this.state.Title.length > 0 && this.state.Description.length > 0){
+          var new_note = {
             Title: this.state.Title,
             Description: this.state.Description
         }
         var joined = this.state.Get_Note.concat(new_note);
-        this.setState({Get_Note: joined})
-        
+        this.setState({Get_Note: joined})  
         this.setState({Title: '', Description: ''})
         this.save(joined);
+        }else if (this.state.Title.length < 1){
+          alert("Dont forget the Note Title")
+        }else if (this.state.Title.length > 0 && this.state.Description.length < 1) {
+          alert("Dont forget the Note Description")
+        }
+        
 
     }
 

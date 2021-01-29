@@ -23,36 +23,32 @@ class AddCategory extends Component {
   }
 
   HandlePost =() =>{
+    const { navigation } = this.props;
     console.log("try post")
-    var new_category = {
-      "name": this.state.Title
+    if (this.state.Title.length > 0){
+      var new_category = {
+        "name": this.state.Title
+      }
+      var joined = this.state.Category_list.concat(new_category);
+      this.setState({Category_list: joined})  
+      this.save(joined);
+     return (navigation.navigate('Home'))
     }
-    var joined = this.state.Category_list.concat(new_category);
-    console.log("-------")
-    console.log(joined);
-    console.log("--------")
-    this.setState({Category_list: joined})
-    console.log(this.state.Category_list)
-  
-    this.save(joined);
+    else{
+      alert("Please Enter Category Name")
+    }
+   
     // this.clearAsyncStorage();
   }
 
-
- 
-
-clearAsyncStorage = async() => {
-AsyncStorage.clear();
-}
+// clearAsyncStorage = async() => {
+// AsyncStorage.clear();
+// }
 
 
 save = async (joined) => {
   try {
-    // await AsyncStorage.setItem("CategoryList", '')
-    // await AsyncStorage.setItem("CategoryList", JSON.stringify(this.state.Category_list))
-    console.log(joined,"---------$$")
     await AsyncStorage.setItem("CategoryList", JSON.stringify(joined))
-
     console.log("saved");
   }catch (error){
       alert(error)
@@ -67,7 +63,6 @@ Load = async () => {
   try{
       let Category = await AsyncStorage.getItem("CategoryList");
       if (Category !== null){
-          // console.log(JSON.parse(Category),"from category");
           this.setState({Category_list: JSON.parse(Category)})
       }else{
         this.setState({Category_list: []});
@@ -89,7 +84,6 @@ Load = async () => {
                                 onChangeText={(Title) => this.setState({Title})}
                                 value={this.state.Title}
                                 contentSize={100, 100}
-                
                             />
                     </View>
                     <View style={{height: 60,width:windowWidth/2,padding:13,borderRadius:20 ,backgroundColor: '#2c5c8c'}}>
@@ -108,7 +102,6 @@ export default AddCategory;
 
 
 const styles = StyleSheet.create({
-    // ...
     appButtonContainer: {
     
     },
