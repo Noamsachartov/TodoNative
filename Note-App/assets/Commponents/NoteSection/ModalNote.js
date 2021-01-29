@@ -27,9 +27,6 @@ class DiscountModal extends Component {
   }
 
   DeleteNote = () =>{
-    console.log(this.props.Delete_Name, "from insideee")
-    // this.Load(this.props.Delete_Name)
-    
     console.log("trydelete")
     this.removeNote(this.props.Delete_Name)
     this.props.modalVisible(false)
@@ -42,11 +39,8 @@ class DiscountModal extends Component {
       const posts = await AsyncStorage.getItem(CategoryName);
       let postsJson = JSON.parse(posts);
       const postFilterd = postsJson.filter(function(e){return e.Title != Item})
-      console.log("after delete", postFilterd);
-
       //Updating Notes In Category
       await AsyncStorage.setItem(CategoryName, JSON.stringify(postFilterd))
-
 
     } catch (error){
       console.log('error', error)
@@ -55,7 +49,6 @@ class DiscountModal extends Component {
 
 
  render() {
-
     var modalComponent = <View style={{height: 100}}>
                             <Text style={{fontWeight: 'bold'}}>{this.props.buissnes_name}</Text>
                             <Text>Sure you want to Delete note?</Text>
