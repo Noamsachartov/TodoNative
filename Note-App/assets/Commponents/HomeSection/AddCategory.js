@@ -30,20 +30,14 @@ class AddCategory extends Component {
         "name": this.state.Title
       }
       var joined = this.state.Category_list.concat(new_category);
-      this.setState({Category_list: joined})  
+      this.setState({Category_list: joined,Title:''})  
       this.save(joined);
      return (navigation.navigate('Home'))
     }
     else{
       alert("Please Enter Category Name")
     }
-   
-    // this.clearAsyncStorage();
   }
-
-// clearAsyncStorage = async() => {
-// AsyncStorage.clear();
-// }
 
 
 save = async (joined) => {
@@ -56,7 +50,11 @@ save = async (joined) => {
   }
 
   componentDidMount() {
-    this.Load();
+    const { navigation } = this.props;
+    this._unsubscribe = navigation.addListener('focus', () => {
+        this.Load();
+    });
+    // this.Load();
 }
 
 Load = async () => {
