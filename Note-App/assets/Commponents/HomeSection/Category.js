@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
 import CategoryModal from './CategoryModal';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -28,6 +29,10 @@ class Category extends Component{
             modalVisible : !this.state.modalVisible,
             Delete_Name: CategoryName
         })
+        // const { navigation } = this.props;
+        // this._unsubscribe = navigation.addListener('focus', () => {
+        //     this.Load();
+        // });
     }
 
     setModalVisible = (name) =>{
@@ -42,9 +47,21 @@ class Category extends Component{
 
 
     componentDidMount() {
+        const { navigation } = this.props;
+        this._unsubscribe = navigation.addListener('focus', () => {
+            this.Load();
+        });
+        //    () => navigation.addListener('focus', () => {
+        //     this.Load();
+        // });
         this.Load();
     }
   
+
+    onFocusFunction = () => {
+        console.log("doo something")
+      }
+
     Load = async () => {
         try{
             let Category = await AsyncStorage.getItem("CategoryList");
@@ -92,7 +109,6 @@ class Category extends Component{
                         <CategoryModal
                                 modalVisible={() => this.setModalVisible(this.state.Delete_Name)}
                                 Delete_Name={this.state.Delete_Name}
-                                // CategoryName={this.props.CategoryName}
                                 />
                         </View>
                         </View>

@@ -20,37 +20,12 @@ export default function Home(props) {
 
 
   return (
-    //     <View>
-    //         <ScrollView showsVerticalScrollIndicator ={false}>
-    //         <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
-    //             <Category navigation={props.navigation} />
- 
-    //         </View>
-    //         </ScrollView> 
-    //             <View style={styles.base}>
-    //                     <View  style={styles.baseTop} >
-    //                         <TouchableHighlight>
-    //                             <Icon onPress={Add_Categorey} name="plus" size={70} style={{color:'whitesmoke', margin: 21}} />
-    //                         </TouchableHighlight >
-    //                     </View>
-    //                     <View style={styles.baseBottom} />
-    //             </View>
-    //    </View>
      <View>
             <ScrollView showsVerticalScrollIndicator ={false}>
             <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
                 <Category navigation={props.navigation} />
-
             </View>
             </ScrollView> 
-                {/* <View style={styles.Base}>
-                        <View>
-                            <TouchableHighlight>
-                                <Icon onPress={Add_Categorey} name="plus" size={70} style={{color:'whitesmoke', margin: 21}} />
-                            </TouchableHighlight >
-                        </View>
-                        <View />
-                </View> */}
     </View>
   );
 }
