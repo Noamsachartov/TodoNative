@@ -67,7 +67,7 @@ Load = async () => {
   try{
       let Category = await AsyncStorage.getItem("CategoryList");
       if (Category !== null){
-          console.log(JSON.parse(Category),"from category");
+          // console.log(JSON.parse(Category),"from category");
           this.setState({Category_list: JSON.parse(Category)})
       }else{
         this.setState({Category_list: []});

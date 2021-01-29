@@ -1,25 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,ScrollView, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View,ScrollView, TouchableOpacity, Button , Modal} from 'react-native';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
-
+import CategoryModal from './CategoryModal';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 class Category extends Component{
     state = {
         Get_Category: [],
-        List: ''
+        List: '',
+        modalVisible: false,
+        setModalVisible : false,
+        modalComponent : '',
+        Delete_Name: ''
     }
     Category_List =() =>{
         console.log("pressed")
     }
-    Preference =() => {
+    Preference =(CategoryName) => {
         console.log("edit")
+        this.setState({
+            modalVisible : !this.state.modalVisible,
+            Delete_Name: CategoryName
+        })
     }
+
+    setModalVisible = (name) =>{
+        this.setState({
+            modalVisible : !this.state.modalVisible,
+            Delete_Name: name
+        })
+        console.log("from modal",name)
+    }
+
 
 
 
@@ -46,7 +63,7 @@ class Category extends Component{
             <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
                              <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10                                                }}>
                                  <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
-                                 <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+                                 <Icon onPress={() => this.Preference(item.name)} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
                              </View>
             </TouchableOpacity>
         )
@@ -61,6 +78,25 @@ class Category extends Component{
 
             return(
                 <View style={styles.container}>
+                      {/* SetMOdal */}
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        }}>
+                        <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                        <CategoryModal
+                                modalVisible={() => this.setModalVisible(this.state.Delete_Name)}
+                                Delete_Name={this.state.Delete_Name}
+                                // CategoryName={this.props.CategoryName}
+                                />
+                        </View>
+                        </View>
+                    </Modal>
+             {/* End Modal */}
                     <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
                         <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
                              <FlatList 
@@ -96,6 +132,21 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 10
   },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  }
 });
 
 
