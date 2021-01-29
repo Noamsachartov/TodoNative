@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -28,39 +29,30 @@ class DiscountModal extends Component {
   DeleteNote = () =>{
     console.log(this.props.Delete_Name, "from insideee")
     // this.Load(this.props.Delete_Name)
+    
     console.log("trydelete")
+    this.removeNote(this.props.Delete_Name)
     this.props.modalVisible(false)
   }
 
-
-  Load = async (name) => {
+  removeNote = async (ItemName) => {
     try{
-      console.log("tr333",name)
-      var category = this.props.CategoryName
-      console.log(category,"!!!!")
-        let Category_note = await AsyncStorage.getItem(category);
+      var Item = `${ItemName}`;
+      var CategoryName = `${this.props.CategoryName}`;
+      const posts = await AsyncStorage.getItem(CategoryName);
+      let postsJson = JSON.parse(posts);
+      const postFilterd = postsJson.filter(function(e){return e.Title != Item})
+      console.log("after delete", postFilterd);
 
-        if (Category_note !== null){
-            console.log(JSON.parse(Category_note),"from Modal");
-            this.setState({Get_Note: JSON.parse(Category_note)})
-            var filterd_list = Category_note.filter(item => item.Title != name)
-            console.log("---filterd---",filterd_list)
-            this.save(filterd_list)
-        }
+      //Updating Notes In Category
+      await AsyncStorage.setItem(CategoryName, JSON.stringify(postFilterd))
+
+
     } catch (error){
-        alert(err);
+      console.log('error', error)
     }
-}
-
-save = async (joined) => {
-  try {
-    var name = `${this.props.CategoryName}`;
-    await AsyncStorage.setItem(name, JSON.stringify(joined))
-    console.log("after filterd");
-  }catch (error){
-    alert(error)
   }
-}
+
 
  render() {
 
