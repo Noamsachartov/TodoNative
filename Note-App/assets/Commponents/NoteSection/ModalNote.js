@@ -50,7 +50,6 @@ class DiscountModal extends Component {
 
  render() {
     var modalComponent = <View style={{height: 100}}>
-                            <Text style={{fontWeight: 'bold'}}>{this.props.buissnes_name}</Text>
                             <Text>Sure you want to Delete note?</Text>
                               <View style={{flex:1, flexDirection: 'row', alignItems: 'flex-end'}}>   
                                 <TouchableHighlight style={{flex:1}}>

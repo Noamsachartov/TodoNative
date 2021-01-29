@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React,{Component} from 'react';
 import { StyleSheet, Text, View,ScrollView,SafeAreaView , TouchableOpacity,Modal,FlatList } from 'react-native';
 import { Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo'
+// import Icon from 'react-native-vector-icons/Entypo'
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import NoteModal from './ModalNote';
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,7 +23,6 @@ class Note extends Component{
             modalVisible : !this.state.modalVisible,
             Delete_Name: name
         })
-        console.log("from modal",name)
     }
 
 
@@ -31,13 +32,11 @@ class Note extends Component{
 
     
     renderItem = ({item, index}) => {
-      var name = item.name
-      console.log("render")
       return (
         <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
              <Text style={styles.Note_Title}>{item.Title}</Text>
              <Text style={styles.Note_Description}>{item.Description}</Text>
-             <Icon onPress={() => this.setModalVisible(item.Title)} name="edit" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+             <Icon onPress={() => this.setModalVisible(item.Title)} name="trash" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
         </View>
       )
     }

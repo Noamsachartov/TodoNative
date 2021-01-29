@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View,ScrollView, TouchableOpacity, Button , Modal} from 'react-native';
 import { Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
 import CategoryModal from './CategoryModal';
@@ -63,7 +64,7 @@ class Category extends Component{
             <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
                              <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10                                                }}>
                                  <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
-                                 <Icon onPress={() => this.Preference(item.name)} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+                                 <Icon onPress={() => this.Preference(item.name)} name="trash" size={25} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop:40, paddingHorizontal: 20}} />
                              </View>
             </TouchableOpacity>
         )

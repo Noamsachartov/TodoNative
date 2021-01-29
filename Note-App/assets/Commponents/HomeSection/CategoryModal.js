@@ -11,7 +11,6 @@ import {
   Linking,
   Modal
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const windowWidth = Dimensions.get('window').width;
@@ -35,7 +34,6 @@ class CategoryModal extends Component {
 
   removeNote = async (ItemName) => {
     try{
-    //   var Item = `${ItemName}`;
       var CategoryName = `${ItemName}`;
       const posts = await AsyncStorage.getItem("CategoryList");
       let postsJson = JSON.parse(posts);
@@ -51,8 +49,7 @@ class CategoryModal extends Component {
 
  render() {
     var modalComponent = <View style={{height: 100}}>
-                            <Text style={{fontWeight: 'bold'}}>{this.props.buissnes_name}</Text>
-                            <Text>Sure you want to Delete Category?</Text>
+                            <Text>Sure you want to Delete {this.props.Delete_Name}?</Text>
                               <View style={{flex:1, flexDirection: 'row', alignItems: 'flex-end'}}>   
                                 <TouchableHighlight style={{flex:1}}>
                                             <Button onPress={this.HideModalHandler}  title="לא"/>
