@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import NoteModal from './ModalNote';
+import NoteImagesPicker from './NoteImagePicker';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,6 +38,7 @@ class Note extends Component{
              <Text style={styles.Note_Title}>{item.Title}</Text>
              <Text style={styles.Note_Description}>{item.Description}</Text>
              <Icon onPress={() => this.setModalVisible(item.Title)} name="trash" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+             <NoteImagesPicker />
         </View>
       )
     }
