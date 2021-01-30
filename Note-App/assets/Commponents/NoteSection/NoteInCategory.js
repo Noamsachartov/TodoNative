@@ -23,7 +23,8 @@ class NoteInCategory extends Component{
     CategoryName: '',
     Title: '',
     Description: '',
-    Img:''
+    Img:'',
+    afterImg: false
   }
 
     Add_Note = () => {
@@ -46,7 +47,7 @@ class NoteInCategory extends Component{
           alert("Dont forget the Note Description")
         }
 
-
+        
 
     }
 
@@ -111,24 +112,34 @@ class NoteInCategory extends Component{
             <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
            
                 <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>{this.state.CategoryName} Notes</Text>
+               
                 <Note needrender={this.isrender} Data={this.state.Get_Note} CategoryName={this.state.CategoryName} />
-
-                <TouchableHighlight>
-                  <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
-                </TouchableHighlight >
-                <TextInput
-                  placeholder="Type here New Title Item!"
-                  onChangeText={(Title) => this.setState({Title})}
-                  value={this.state.Title}
-                  contentSize={100, 100}
-                />
-                <TextInput
-                  placeholder="Type here New Description!"
-                  onChangeText={(Description) => this.setState({Description})}
-                  value={this.state.Description}
-                  contentSize={100, 100}
-                />
-                <NoteImagesPicker  func = {this.getId2RemoveFromChild} /> 
+                  <View style={{borderColor: "#2c5c8c", borderWidth: 5}}>
+                    <View style={{flex: 1, flexDirection: 'row-reverse'}}>
+                        <View>
+                          <TouchableHighlight>
+                          <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', marginRight: 10,  color: '#2c5c8c'}} />
+                          </TouchableHighlight >
+                        </View>
+                        <View>
+                          <Text style={{fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 15}}>Add New Note</Text>
+                        </View>
+                    </View>
+                  
+                  <TextInput
+                    placeholder="Type here New Title Item!"
+                    onChangeText={(Title) => this.setState({Title})}
+                    value={this.state.Title}
+                    contentSize={100, 100}
+                  />
+                  <TextInput
+                    placeholder="Type here New Description!"
+                    onChangeText={(Description) => this.setState({Description})}
+                    value={this.state.Description}
+                    contentSize={100, 100}
+                  />
+                  <NoteImagesPicker status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
+                </View>
             </View>
             
             </ScrollView> 

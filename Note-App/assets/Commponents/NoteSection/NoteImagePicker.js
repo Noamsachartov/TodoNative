@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import GalleryIcon from 'react-native-vector-icons/FontAwesome';
+import PhotoIcon from 'react-native-vector-icons/AntDesign';
+
+
 import Constants from 'expo-constants';
 import { Value } from 'react-native-reanimated';
 
@@ -10,6 +14,7 @@ export default function NoteImagesPicker(props) {
   useEffect(() => {
     setImage(null);
     (async () => {
+      setImage(null);
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
@@ -56,11 +61,10 @@ export default function NoteImagesPicker(props) {
   
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Open camera" onPress={openCamera} />
-      <Text> </Text>
-      <Button title="Choose from gallery" onPress={pickImage} />
-      {image && <Image source={{ uri:image }} style={{ width: 200, height: 200 }} />}
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' , flexDirection: 'row' }}>
+      <GalleryIcon name="picture-o" size={50} onPress={pickImage} style={{marginRight: 20,  color: '#2c5c8c'}}  />
+      <PhotoIcon name="camera" size={50} title="Open camera" onPress={openCamera} style={{ color: '#2c5c8c'}} />
+      {image && <Image source={{ uri:image }} style={{ width: 150, height: 150 }} />}
     </View>
   );
 }
