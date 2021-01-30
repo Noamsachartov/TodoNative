@@ -8,6 +8,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import NoteImagesPicker from './NoteImagePicker';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,6 +29,7 @@ class NoteInCategory extends Component{
           var new_note = {
             Title: this.state.Title,
             Description: this.state.Description
+             
         }
         var joined = this.state.Get_Note.concat(new_note);
         this.setState({Get_Note: joined})  
@@ -37,7 +40,7 @@ class NoteInCategory extends Component{
         }else if (this.state.Title.length > 0 && this.state.Description.length < 1) {
           alert("Dont forget the Note Description")
         }
-        
+
 
     }
 
@@ -108,6 +111,7 @@ class NoteInCategory extends Component{
                   value={this.state.Description}
                   contentSize={100, 100}
                 />
+                <NoteImagesPicker/>
             </View>
             
             </ScrollView> 
@@ -138,6 +142,9 @@ class NoteInCategory extends Component{
                   value={this.state.Description}
                   contentSize={100, 100}
                 />
+               <Text>  </Text>
+               <NoteImagesPicker/>
+
       </View>
       </ScrollView> 
 </View>
