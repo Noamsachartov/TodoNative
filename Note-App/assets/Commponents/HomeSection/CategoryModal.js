@@ -40,7 +40,7 @@ class CategoryModal extends Component {
       const postFilterd = postsJson.filter(function(e){return e.name != CategoryName})
       //Updating Notes In Category
       await AsyncStorage.setItem("CategoryList", JSON.stringify(postFilterd))
-
+      this.props.isdeleted(1)
     } catch (error){
       console.log('error', error)
     }

@@ -47,7 +47,6 @@ export default function NoteImagesPicker(props) {
     console.log(result);
 
     if (!result.cancelled) {
-    //  this.setImage.image(result.uri);
     setImage(result.uri);
     console.log(image);
     }

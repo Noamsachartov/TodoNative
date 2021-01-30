@@ -41,7 +41,7 @@ class DiscountModal extends Component {
       const postFilterd = postsJson.filter(function(e){return e.Title != Item})
       //Updating Notes In Category
       await AsyncStorage.setItem(CategoryName, JSON.stringify(postFilterd))
-
+      this.props.needrender(1);
     } catch (error){
       console.log('error', error)
     }

@@ -73,6 +73,11 @@ class Category extends Component{
             alert(err);
         }
     }
+    isdeleted = (isdelete) => {
+        if(isdelete == true){
+            this.Load();
+          }
+    }
 
     renderItem = ({item, index}) => {
         const { navigation } = this.props;
@@ -109,6 +114,7 @@ class Category extends Component{
                         <CategoryModal
                                 modalVisible={() => this.setModalVisible(this.state.Delete_Name)}
                                 Delete_Name={this.state.Delete_Name}
+                                isdeleted={this.isdeleted}
                                 />
                         </View>
                         </View>

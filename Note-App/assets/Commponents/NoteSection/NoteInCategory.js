@@ -47,6 +47,7 @@ class NoteInCategory extends Component{
         }
 
 
+
     }
 
     
@@ -91,6 +92,11 @@ class NoteInCategory extends Component{
       }
   }
 
+  isrender = (isdelete) =>{
+    if(isdelete == true){
+      this.Load();
+    }
+  }
 
   render(){
     
@@ -105,7 +111,7 @@ class NoteInCategory extends Component{
             <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
            
                 <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>{this.state.CategoryName} Notes</Text>
-                <Note Data={this.state.Get_Note} CategoryName={this.state.CategoryName} />
+                <Note needrender={this.isrender} Data={this.state.Get_Note} CategoryName={this.state.CategoryName} />
 
                 <TouchableHighlight>
                   <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
@@ -122,7 +128,7 @@ class NoteInCategory extends Component{
                   value={this.state.Description}
                   contentSize={100, 100}
                 />
-                <NoteImagesPicker func = {this.getId2RemoveFromChild} /> 
+                <NoteImagesPicker  func = {this.getId2RemoveFromChild} /> 
             </View>
             
             </ScrollView> 
