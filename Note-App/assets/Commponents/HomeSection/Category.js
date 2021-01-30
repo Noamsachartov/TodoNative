@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View,ScrollView, TouchableOpacity, Button , Modal} from 'react-native';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-// import Icon from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
 import CategoryModal from './CategoryModal';
@@ -18,7 +17,8 @@ class Category extends Component{
         modalVisible: false,
         setModalVisible : false,
         modalComponent : '',
-        Delete_Name: ''
+        Delete_Name: '',
+        AllKeys: []
     }
     Category_List =() =>{
         console.log("pressed")
@@ -29,10 +29,6 @@ class Category extends Component{
             modalVisible : !this.state.modalVisible,
             Delete_Name: CategoryName
         })
-        // const { navigation } = this.props;
-        // this._unsubscribe = navigation.addListener('focus', () => {
-        //     this.Load();
-        // });
     }
 
     setModalVisible = (name) =>{
@@ -51,28 +47,44 @@ class Category extends Component{
         this._unsubscribe = navigation.addListener('focus', () => {
             this.Load();
         });
-        //    () => navigation.addListener('focus', () => {
-        //     this.Load();
-        // });
         this.Load();
     }
-  
 
-    onFocusFunction = () => {
-        console.log("doo something")
-      }
 
     Load = async () => {
+        this.setState({AllKeys: []})
         try{
             let Category = await AsyncStorage.getItem("CategoryList");
             if (Category !== null){
                 console.log(JSON.parse(Category),"from category");
                 this.setState({Get_Category: JSON.parse(Category)})
+                var parsecategory = JSON.parse(Category)
+                var categoryNames_temp =[];
+                   
+                 var xx =  parsecategory.map((item) => {
+                     return(
+                        categoryNames_temp.push(item.name)
+                     )})
+                
+                    var res = [];
+                    AsyncStorage.multiGet(categoryNames_temp, (err, stores) => {
+                      stores.map((result, i, store) => {
+                        let key = store[i][0];
+                        let value = store[i][1];
+                        var parser = JSON.parse(value,"parser")
+                        res.push(key,parser.length)
+                        var newkeyValue = [key,parser.length]
+                        var joined = this.state.AllKeys.concat(newkeyValue);
+                        this.setState({AllKeys: joined})
+                      });
+                    });
             }
         } catch (error){
             alert(err);
         }
     }
+
+      
     isdeleted = (isdelete) => {
         if(isdelete == true){
             this.Load();
@@ -81,11 +93,25 @@ class Category extends Component{
 
     renderItem = ({item, index}) => {
         const { navigation } = this.props;
+        var getLength = 0;
+        for (let i = 0; i < this.state.AllKeys.length; i++) {
+            let element = this.state.AllKeys;
+            if(element[i] == item.name){
+                getLength = element[i+1];
+            }
+        }
         return (
 
             <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
-                             <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10                                                }}>
-                                 <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
+                             <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10}}>
+                                 <View style={{flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
+                                     <View>
+                                        <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
+                                     </View>
+                                     <View>
+                                        <Text style={{fontSize: 25, color: 'whitesmoke', marginLeft: 25, marginTop: 10}}>{getLength}</Text>
+                                     </View>
+                                 </View>
                                  <Icon onPress={() => this.Preference(item.name)} name="trash" size={25} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop:40, paddingHorizontal: 20}} />
                              </View>
             </TouchableOpacity>
@@ -137,7 +163,7 @@ class Category extends Component{
 
         else {
             return <View>
-                <Text>Loading...</Text>
+                <Text>Click on the Plus to add category</Text>
             </View>
         }
     }
@@ -172,39 +198,3 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
-
-    //         <View style={styles.container}>
-    //             <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
-    //                 <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
-    //                     <TouchableOpacity onPress={this.Category_List,() => navigation.navigate('NoteInCategory')}>
-    //                         <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c'}}>
-    //                             <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>Category Title</Text>
-    //                             <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-    //                         </View>
-    //                     </TouchableOpacity>
-    //                     <TouchableOpacity onPress={this.Category_List ,() => navigation.navigate('NoteInCategory')}>
-    //                         <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#c4c4c4'}}>
-    //                             <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>Category Title</Text>
-    //                             <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-    //                         </View>
-    //                     </TouchableOpacity>
-    //                 </View>
-    //                 {/* <View style={{flex: 1, flexDirection: 'row'}}>
-    //                     <TouchableOpacity onPress={this.Category_List ,() => navigation.navigate('NoteInCategory')}>
-    //                         <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#c4c4c4'}}>
-    //                             <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>Category Title</Text>
-    //                             <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-    //                         </View>
-    //                     </TouchableOpacity>
-    //                     <TouchableOpacity onPress={this.Category_List ,() => navigation.navigate('NoteInCategory')}>
-    //                         <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c'}}>
-    //                             <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>Category Title</Text>
-    //                             <Icon onPress={this.Preference} name="sound-mix" size={30} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-    //                         </View>
-    //                     </TouchableOpacity>
-    //                 </View> */}
-    //         </ScrollView>
-    //   <StatusBar style="auto" />
-    // </View>
