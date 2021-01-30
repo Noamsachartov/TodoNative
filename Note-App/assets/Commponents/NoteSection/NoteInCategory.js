@@ -9,6 +9,8 @@ import { TouchableOpacity} from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NoteImagesPicker from './NoteImagePicker';
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -20,7 +22,8 @@ class NoteInCategory extends Component{
     Get_Note: [],
     CategoryName: '',
     Title: '',
-    Description: ''
+    Description: '',
+    Img:''
   }
 
     Add_Note = () => {
@@ -28,12 +31,14 @@ class NoteInCategory extends Component{
         if(this.state.Title.length > 0 && this.state.Description.length > 0){
           var new_note = {
             Title: this.state.Title,
-            Description: this.state.Description
-             
+            Description: this.state.Description,
+            Img: this.state.Img
         }
         var joined = this.state.Get_Note.concat(new_note);
-        this.setState({Get_Note: joined})  
-        this.setState({Title: '', Description: ''})
+        this.setState({Get_Note: joined})         
+        console.log("uril")
+        console.log(joined)
+        this.setState({Title: '', Description: '',Img:''})
         this.save(joined);
         }else if (this.state.Title.length < 1){
           alert("Dont forget the Note Title")
@@ -49,6 +54,7 @@ class NoteInCategory extends Component{
     componentDidMount() {
       this.setState({CategoryName: this.props.route.params.name})          
       this.Load();
+      
   }
 
 
@@ -63,7 +69,12 @@ class NoteInCategory extends Component{
     }
   }
 
+  getId2RemoveFromChild = (url) => {
+    this.setState({ Img: [url] })
+      alert(this.state.Img)
+   console.log("In1:" , url);
 
+  }
 
   Load = async () => {
    
@@ -111,7 +122,7 @@ class NoteInCategory extends Component{
                   value={this.state.Description}
                   contentSize={100, 100}
                 />
-                <NoteImagesPicker/>
+                <NoteImagesPicker func = {this.getId2RemoveFromChild} /> 
             </View>
             
             </ScrollView> 
@@ -142,8 +153,7 @@ class NoteInCategory extends Component{
                   value={this.state.Description}
                   contentSize={100, 100}
                 />
-               <Text>  </Text>
-               <NoteImagesPicker/>
+                <NoteImagesPicker func = {this.getId2RemoveFromChild} /> 
 
       </View>
       </ScrollView> 

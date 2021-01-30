@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{Component} from 'react';
-import { StyleSheet, Text, View,ScrollView,SafeAreaView , TouchableOpacity,Modal,FlatList } from 'react-native';
+import { StyleSheet, Text, View,ScrollView,SafeAreaView , TouchableOpacity,Modal,FlatList,Image } from 'react-native';
 import { Dimensions } from 'react-native';
 // import Icon from 'react-native-vector-icons/Entypo'
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -33,12 +33,15 @@ class Note extends Component{
 
     
     renderItem = ({item, index}) => {
+      console.log(item.Img[0])
       return (
         <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
              <Text style={styles.Note_Title}>{item.Title}</Text>
              <Text style={styles.Note_Description}>{item.Description}</Text>
+             {/* {() => {if (item.Img[0]){return (<Image source={{ uri:item.Img[0] }} style={{flex: 1, alignSelf: 'flex-end', width: 70, height: 70 }} />)}}} */}
+             {item.Img[0] ? <Image source={{ uri:item.Img[0] }} style={{flex: 1, alignSelf: 'flex-end', width: 70, height: 70 }} /> : <Text></Text>}
+             {/* <Image source={{ uri:item.Img[0] }} style={{flex: 1, alignSelf: 'flex-end', width: 70, height: 70 }} /> */}
              <Icon onPress={() => this.setModalVisible(item.Title)} name="trash" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
-             <NoteImagesPicker />
         </View>
       )
     }
