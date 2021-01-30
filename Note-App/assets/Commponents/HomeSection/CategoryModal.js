@@ -52,10 +52,10 @@ class CategoryModal extends Component {
                             <Text>Sure you want to Delete {this.props.Delete_Name}?</Text>
                               <View style={{flex:1, flexDirection: 'row', alignItems: 'flex-end'}}>   
                                 <TouchableHighlight style={{flex:1}}>
-                                            <Button onPress={this.HideModalHandler}  title="לא"/>
+                                            <Button onPress={this.HideModalHandler}  title="No"/>
                                 </TouchableHighlight>
                                 <TouchableHighlight style={{flex:1}} >
-                                            <Button onPress={this.DeleteNote} title="כן"/>
+                                            <Button onPress={this.DeleteNote} title="Yes"/>
                                 </TouchableHighlight>
                               </View>
                             </View>    

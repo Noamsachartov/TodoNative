@@ -23,6 +23,7 @@ function MainTab() {
       <Tab.Screen name="Home" component={Home} 
       options={{
           title: 'Home',
+          tabBarIcon: ()=> <Icon name="home" size={30} style={{color:'whitesmoke'}} />
       }} />
       <Tab.Screen name="Add Category" component={AddCategory}
             options={{

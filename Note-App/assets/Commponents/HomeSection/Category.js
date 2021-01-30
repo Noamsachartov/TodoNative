@@ -67,15 +67,18 @@ class Category extends Component{
                      )})
                 
                     var res = [];
+                    
                     AsyncStorage.multiGet(categoryNames_temp, (err, stores) => {
                       stores.map((result, i, store) => {
                         let key = store[i][0];
                         let value = store[i][1];
-                        var parser = JSON.parse(value,"parser")
-                        res.push(key,parser.length)
-                        var newkeyValue = [key,parser.length]
-                        var joined = this.state.AllKeys.concat(newkeyValue);
-                        this.setState({AllKeys: joined})
+                        if (value){
+                            var parser = JSON.parse(value,"parser")
+                            res.push(key,parser.length)
+                            var newkeyValue = [key,parser.length]
+                            var joined = this.state.AllKeys.concat(newkeyValue);
+                            this.setState({AllKeys: joined})
+                        }
                       });
                     });
             }
@@ -146,16 +149,16 @@ class Category extends Component{
                         </View>
                     </Modal>
              {/* End Modal */}
-                    <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
-                        <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}>
+                    {/* <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
+                        <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}> */}
                              <FlatList 
                                 data={this.state.Get_Category}
                                 renderItem={this.renderItem}
                                 keyExtractor={(item,index) => index.toString()}
                                 numColumns={2}                   
                             />    
-                        </View>
-                    </ScrollView>
+                        {/* </View>
+                    </ScrollView> */}
                 <StatusBar style="auto" />
                 </View>
             )
