@@ -103,8 +103,6 @@ class NoteInCategory extends Component{
   render(){
 
     if(this.state.Get_Note){
-      console.log("there is data")
-
       return (
         <View style={styles.mainView}>
             <ScrollView showsVerticalScrollIndicator ={false}>
@@ -144,7 +142,6 @@ class NoteInCategory extends Component{
     </View>
   );}
   else {
-    console.log("there is nooooo data")
     return(
       <View>
            <View style={styles.secondryView}>
