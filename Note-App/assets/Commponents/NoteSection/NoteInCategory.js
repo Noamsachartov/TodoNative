@@ -36,8 +36,7 @@ class NoteInCategory extends Component{
         }
         var joined = this.state.Get_Note.concat(new_note);
         this.setState({Get_Note: joined})         
-        console.log("uril")
-        console.log(joined)
+        // console.log(joined)
         this.setState({Title: '', Description: '',Img:''})
         this.save(joined);
         }else if (this.state.Title.length < 1){
@@ -76,7 +75,7 @@ class NoteInCategory extends Component{
   getId2RemoveFromChild = (url) => {
     this.setState({ Img: [url] })
       // alert(this.state.Img)
-   console.log("In1:" , url);
+  //  console.log("In1:" , url);
 
   }
 
@@ -87,7 +86,7 @@ class NoteInCategory extends Component{
           let Category_note = await AsyncStorage.getItem(name);
 
           if (Category_note !== null){
-              console.log(JSON.parse(Category_note),"from category");
+              // console.log(JSON.parse(Category_note),"from category");
               this.setState({Get_Note: JSON.parse(Category_note)})
           }
       } catch (error){
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
     base: {width:windowWidth, zIndex: 3,  bottom: 0, position: 'absolute'},
     mainView: {backgroundColor: 'whitesmoke'},
     secondryView: {flex: 1, flexDirection: 'column', marginBottom: 250},
-    CategoryName: {fontSize: 40, marginTop: 10, color: '#2c5c8c'},
+    CategoryName: {fontSize: 40, marginTop: 10, color: '#2c5c8c', fontWeight: 'bold'},
     thirdmain: {borderColor: "#2c5c8c", borderWidth: 5},
     fourthMain: {flex: 1, flexDirection: 'row-reverse'},
     newNote: {fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 1},

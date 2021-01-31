@@ -66,6 +66,7 @@ class CategoryModal extends Component {
 export default CategoryModal;
 
 
+
 const styles = StyleSheet.create({
   mainView: {height: 100},
   text: {fontWeight: 'bold', fontSize: 20},

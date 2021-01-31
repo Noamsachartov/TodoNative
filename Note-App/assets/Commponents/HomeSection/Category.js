@@ -124,8 +124,6 @@ class Category extends Component{
         const { navigation } = this.props;
 
         if (this.state.Get_Category.length > 0){
-            console.log(this.state.Get_Category, "return")
-
             return(
                 <View style={styles.container}>
                       {/* SetMOdal */}
