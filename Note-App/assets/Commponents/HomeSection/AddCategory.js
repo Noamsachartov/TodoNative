@@ -101,7 +101,7 @@ export default AddCategory;
 const styles = StyleSheet.create({
     mainView: {flex: 1, flexDirection: 'column', justifyContent:'space-between',alignItems: 'center', marginVertical: 20},
     secondView: {height: 80,width: windowWidth/1.3},
-    inputCategory: { borderWidth: 5,height: 50,paddingRight:10, borderRadius: 10, borderColor: '#2c5c8c'},
+    inputCategory: { borderWidth: 5,height: 50,paddingLeft:10, borderRadius: 10, borderColor: '#2c5c8c'},
     buttonCategory: {height: 60,width:windowWidth/2,padding:13,borderRadius:20 ,backgroundColor: '#2c5c8c'},
     appButtonText: {
       fontSize: 18,

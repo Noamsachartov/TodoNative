@@ -103,7 +103,7 @@ class NoteInCategory extends Component{
   }
 
   render(){
-    console.disableYellowBox = true;
+
     if(this.state.Get_Note){
       return (
         <View style={styles.mainView}>
