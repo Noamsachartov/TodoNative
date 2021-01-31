@@ -75,7 +75,7 @@ class NoteInCategory extends Component{
 
   getId2RemoveFromChild = (url) => {
     this.setState({ Img: [url] })
-      alert(this.state.Img)
+      // alert(this.state.Img)
    console.log("In1:" , url);
 
   }
