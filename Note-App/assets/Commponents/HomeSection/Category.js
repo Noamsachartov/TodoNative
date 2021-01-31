@@ -192,9 +192,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   renderView: {width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10},
-  secondView: {flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'},
+  secondView: {flex: 1, flexDirection: 'row', justifyContent: 'space-between'},
   itemName: {margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30},
-  getlength: {fontSize: 25, color: 'whitesmoke', marginLeft: 25, marginTop: 10},
-  iconTrash: {color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop:40, paddingHorizontal: 20}
+  getlength: {fontSize: 25, color: 'whitesmoke', marginRight: 25, marginTop: 10},
+  iconTrash: {color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-end', marginTop:40, paddingHorizontal: 20}
 });
 

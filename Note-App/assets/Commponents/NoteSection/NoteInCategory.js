@@ -10,8 +10,10 @@ import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NoteImagesPicker from './NoteImagePicker';
 import * as ImagePicker from 'expo-image-picker';
+import { LogBox } from 'react-native';
 
-
+// Ignore all log notifications:
+LogBox.ignoreAllLogs();
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -101,7 +103,7 @@ class NoteInCategory extends Component{
   }
 
   render(){
-
+    console.disableYellowBox = true;
     if(this.state.Get_Note){
       return (
         <View style={styles.mainView}>
@@ -191,8 +193,8 @@ const styles = StyleSheet.create({
     secondryView: {flex: 1, flexDirection: 'column', marginBottom: 250},
     CategoryName: {fontSize: 40, marginTop: 10, color: '#2c5c8c', fontWeight: 'bold'},
     thirdmain: {borderColor: "#2c5c8c", borderWidth: 5},
-    fourthMain: {flex: 1, flexDirection: 'row-reverse'},
+    fourthMain: {flex: 1, flexDirection: 'row'},
     newNote: {fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 1},
-    plusIcon: {color:'black', marginRight: 40,  color: '#2c5c8c'}
+    plusIcon: {color:'black', marginLeft: 40,  color: '#2c5c8c'}
 });
 

@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
     },
     safeView: {flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' },
     flatView : {flex: 1, flexDirection: 'column', marginBottom: 10 },
-    image: {flex: 1, alignSelf: 'flex-end', width: 120, height: 100, borderRadius: 10, marginBottom: -85, marginLeft: 35 },
-    icon: {color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop: 20, marginLeft: 10},
+    image: {flex: 1, alignSelf: 'flex-end', width: 120, height: 100, borderRadius: 10, marginBottom: -85, marginRight: 35 },
+    icon: {color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-end', marginTop: 20, marginRight: 10},
     itemView: {width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'},
-    renderView: {flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'}
+    renderView: {flex: 1, flexDirection: 'row', justifyContent: 'space-between'}
   });
