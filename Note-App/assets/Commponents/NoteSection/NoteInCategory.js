@@ -23,8 +23,7 @@ class NoteInCategory extends Component{
     CategoryName: '',
     Title: '',
     Description: '',
-    Img:'',
-    afterImg: false
+    Img:''
   }
 
     Add_Note = () => {
@@ -47,13 +46,19 @@ class NoteInCategory extends Component{
           alert("Dont forget the Note Description")
         }
     }
+    
+
+
+
+
+
 
     
 
     componentDidMount() {
       this.setState({CategoryName: this.props.route.params.name})          
       this.Load();
-      
+    
   }
 
 
@@ -113,12 +118,12 @@ class NoteInCategory extends Component{
                   <View style={{borderColor: "#2c5c8c", borderWidth: 5}}>
                     <View style={{flex: 1, flexDirection: 'row-reverse'}}>
                         <View>
-                          <TouchableHighlight>
-                          <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', marginRight: 10,  color: '#2c5c8c'}} />
-                          </TouchableHighlight >
+                          <Text style={{fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 1}}>Add New Note</Text>
                         </View>
                         <View>
-                          <Text style={{fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 15}}>Add New Note</Text>
+                          <TouchableHighlight>
+                          <Icon onPress={this.Add_Note} name="plus" size={80} style={{color:'black', marginRight: 40,  color: '#2c5c8c'}} />
+                          </TouchableHighlight >
                         </View>
                     </View>
                   
@@ -134,7 +139,7 @@ class NoteInCategory extends Component{
                     value={this.state.Description}
                     contentSize={100, 100}
                   />
-                  <NoteImagesPicker status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
+                  <NoteImagesPicker  status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
                 </View>
             </View>
             {/* </SafeAreaView> */}
@@ -212,33 +217,3 @@ export default NoteInCategory
 //     },
 // });
 
-
-
-
-// <View>
-// <ScrollView showsVerticalScrollIndicator ={false}>
-// <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
-// <TouchableHighlight>
-//       <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
-// </TouchableHighlight >
-//     <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>Category Name</Text>
-//     <TouchableHighlight>
-//             <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', margin: 21}} />
-//           </TouchableHighlight >
-//           <TextInput
-//             placeholder="Type here New Title Item!"
-//             onChangeText={(Title) => this.setState({Title})}
-//             value={this.state.Title}
-//             contentSize={100, 100}
-//           />
-//           <TextInput
-//             placeholder="Type here New Description!"
-//             onChangeText={(Description) => this.setState({Description})}
-//             value={this.state.Description}
-//             contentSize={100, 100}
-//           />
-//           <NoteImagesPicker func = {this.getId2RemoveFromChild} /> 
-
-// </View>
-// </ScrollView> 
-// </View>

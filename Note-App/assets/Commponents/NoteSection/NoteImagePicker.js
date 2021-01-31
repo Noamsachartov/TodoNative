@@ -32,9 +32,7 @@ export default function NoteImagesPicker(props) {
       aspect: [4, 3],
       quality: 1,
     });
-    alert(result.uri)
     props.func(result.uri);
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -49,11 +47,9 @@ export default function NoteImagesPicker(props) {
       quality: 1,
     });
     props.func(result.uri);
-    console.log(result);
 
     if (!result.cancelled) {
     setImage(result.uri);
-    console.log(image);
     }
   };
 
@@ -65,6 +61,7 @@ export default function NoteImagesPicker(props) {
       <GalleryIcon name="picture-o" size={50} onPress={pickImage} style={{marginRight: 20,  color: '#2c5c8c'}}  />
       <PhotoIcon name="camera" size={50} title="Open camera" onPress={openCamera} style={{ color: '#2c5c8c'}} />
       {image && <Image source={{ uri:image }} style={{ width: 150, height: 150 }} />}
+      {/* {<Image source={{ uri:image }} style={{ width: 150, height: 150 }} />} */}
     </View>
   );
 }

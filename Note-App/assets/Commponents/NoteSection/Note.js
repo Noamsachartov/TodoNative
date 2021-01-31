@@ -34,11 +34,17 @@ class Note extends Component{
     
     renderItem = ({item, index}) => {
       return (
-        <View key={index} name={item.Title} style={{width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}}>
-             <Text style={styles.Note_Title}>{item.Title}</Text>
-             <Text style={styles.Note_Description}>{item.Description}</Text>
-             {item.Img[0] ? <Image source={{ uri:item.Img[0] }} style={{flex: 1, alignSelf: 'flex-end', width: 70, height: 70 }} /> : <Text></Text>}
-             <Icon onPress={() => this.setModalVisible(item.Title)} name="trash" size={30} style={{color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', margin: 8}} />
+        <View key={index} name={item.Title} style={styles.itemView}>
+          <View style={{flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
+            <View>
+              <Text style={styles.Note_Title}>{item.Title}</Text>
+              <Text style={styles.Note_Description}>{item.Description}</Text>
+            </View>
+            <View style={{margin: 10}} >
+              {item.Img[0] ? <Image source={{ uri:item.Img[0] }} style={styles.image} /> : <Text></Text>}
+            </View>
+          </View>
+             <Icon onPress={() => this.setModalVisible(item.Title)} name="trash" size={30} style={styles.icon} />
         </View>
       )
     }
@@ -72,12 +78,13 @@ class Note extends Component{
             </Modal>
              {/* End Modal */}
             <View style={styles.container}>
-                <SafeAreaView  Style={{flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' }}>
-                    <View style={{flex: 1, flexDirection: 'column', marginBottom: 10}}>
+                <SafeAreaView  Style={styles.safeView}>
+                    <View style={styles.flatView}>
                       <FlatList 
                             data={this.props.Data}
                             renderItem={this.renderItem}
-                            keyExtractor={item => item.id}                  
+                            keyExtractor={(item,index) => index.toString()}      
+                            style={{backgroundColor: 'white'}} 
                         />    
                     </View>
                 </SafeAreaView >
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
         margin: 5, color: '#2c5c8c', fontWeight: 'bold', fontSize: 30
       },
       Note_Description: {
-        color: '#2c5c8c', margin: 5
+        color: '#2c5c8c', margin: 5, width: 170
       },
     centeredView: {
       flex: 1,
@@ -133,7 +140,12 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
-    }
+    },
+    safeView: {flex: 1 , marginHorizontal: 10,  justifyContent: 'space-between' },
+    flatView : {flex: 1, flexDirection: 'column', marginBottom: 10},
+    image: {flex: 1, alignSelf: 'flex-end', width: 120, height: 100, borderRadius: 10, marginBottom: -85, marginLeft: 35 },
+    icon: {color:'#2c5c8c', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop: 20, marginLeft: 10},
+    itemView: {width: windowWidth -10, height: 150, marginHorizontal: 5, marginVertical: 8 ,borderRadius:15 , backgroundColor: '#ccddee'}
   });
 
 

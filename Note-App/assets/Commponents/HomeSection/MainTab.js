@@ -4,9 +4,6 @@ import Home from './Home';
 import AddCategory from './AddCategory';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-
-
 const Tab = createBottomTabNavigator();
 
 function MainTab() {

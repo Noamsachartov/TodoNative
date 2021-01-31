@@ -148,17 +148,13 @@ class Category extends Component{
                         </View>
                         </View>
                     </Modal>
-             {/* End Modal */}
-                    {/* <ScrollView Style={{flex: 1 , marginHorizontal: 20, justifyContent: 'space-between' }}>
-                        <View style={{flex: 1, flexDirection: 'row', marginBottom: 10}}> */}
+             {/* End Modal */} 
                              <FlatList 
                                 data={this.state.Get_Category}
                                 renderItem={this.renderItem}
                                 keyExtractor={(item,index) => index.toString()}
                                 numColumns={2}                   
                             />    
-                        {/* </View>
-                    </ScrollView> */}
                 <StatusBar style="auto" />
                 </View>
             )
