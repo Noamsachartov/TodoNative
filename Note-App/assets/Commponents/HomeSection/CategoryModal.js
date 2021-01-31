@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import {
   StyleSheet,
-  TouchableOpacity,
   Text,
   View,
-  ScrollView,
-  Image,
   Button,
   TouchableHighlight,
-  Linking,
-  Modal
 } from 'react-native'
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -48,15 +43,15 @@ class CategoryModal extends Component {
 
 
  render() {
-    var modalComponent = <View style={{height: 100}}>
-                            <Text>Sure you want to Delete {this.props.Delete_Name}?</Text>
-                              <View style={{flex:1, flexDirection: 'row', alignItems: 'flex-end'}}>   
-                                <TouchableHighlight style={{flex:1}}>
-                                            <Button onPress={this.HideModalHandler}  title="No"/>
-                                </TouchableHighlight>
-                                <TouchableHighlight style={{flex:1}} >
-                                            <Button onPress={this.DeleteNote} title="Yes"/>
-                                </TouchableHighlight>
+    var modalComponent = <View style={styles.mainView}>
+                            <Text>Sure you want to Delete <Text style={styles.text}>{this.props.Delete_Name}</Text>?</Text>
+                              <View style={styles.secondView}> 
+                                  <TouchableHighlight style={styles.no}>
+                                              <Button onPress={this.HideModalHandler} title="No"/>
+                                  </TouchableHighlight>
+                                  <TouchableHighlight style={styles.yes} >
+                                              <Button onPress={this.DeleteNote} title="Yes"/>
+                                  </TouchableHighlight>
                               </View>
                             </View>    
     return ( <View>
@@ -69,3 +64,12 @@ class CategoryModal extends Component {
 
 
 export default CategoryModal;
+
+
+const styles = StyleSheet.create({
+  mainView: {height: 100},
+  text: {fontWeight: 'bold', fontSize: 20},
+  secondView: {flex:1, flexDirection: 'row', alignItems: 'flex-end'},
+  no: {flex:1, marginHorizontal: 10},
+  yes: {flex:1}
+  })

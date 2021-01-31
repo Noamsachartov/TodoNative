@@ -11,9 +11,9 @@ const windowHeight = Dimensions.get('window').height;
 export default function Home(props) {
 
   return (
-     <View style={{backgroundColor: 'white', height: windowHeight}}>
+     <View style={styles.mainView}>
             <ScrollView showsVerticalScrollIndicator ={false}>
-            <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
+            <View style={styles.view}>
                 <Category navigation={props.navigation}  />
             </View>
             </ScrollView> 
@@ -22,14 +22,8 @@ export default function Home(props) {
 }
 
 const styles = StyleSheet.create({
-Base: {
-    backgroundColor: 'red',
-    height: 30,
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    width:windowWidth
-}
+mainView: {backgroundColor: 'white', height: windowHeight},
+view: {flex: 1, flexDirection: 'column', marginBottom: 250}
 })
 
 

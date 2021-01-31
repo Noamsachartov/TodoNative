@@ -36,7 +36,6 @@ class Category extends Component{
             modalVisible : !this.state.modalVisible,
             Delete_Name: name
         })
-        console.log("from modal",name)
     }
 
 
@@ -56,7 +55,6 @@ class Category extends Component{
         try{
             let Category = await AsyncStorage.getItem("CategoryList");
             if (Category !== null){
-                console.log(JSON.parse(Category),"from category");
                 this.setState({Get_Category: JSON.parse(Category)})
                 var parsecategory = JSON.parse(Category)
                 var categoryNames_temp =[];
@@ -106,16 +104,16 @@ class Category extends Component{
         return (
 
             <TouchableOpacity  name={item.name} CategoryId={index} key={index} onPress={this.Category_List,() => navigation.navigate('NoteInCategory',{name:item.name})}>
-                             <View style={{width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10}}>
-                                 <View style={{flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
+                             <View style={styles.renderView}>
+                                 <View style={styles.secondView}>
                                      <View>
-                                        <Text style={{margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
+                                        <Text style={styles.itemName}>{item.name}</Text>
                                      </View>
                                      <View>
-                                        <Text style={{fontSize: 25, color: 'whitesmoke', marginLeft: 25, marginTop: 10}}>{getLength}</Text>
+                                        <Text style={styles.getlength}>{getLength}</Text>
                                      </View>
                                  </View>
-                                 <Icon onPress={() => this.Preference(item.name)} name="trash" size={25} style={{color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop:40, paddingHorizontal: 20}} />
+                                 <Icon onPress={() => this.Preference(item.name)} name="trash" size={25} style={styles.iconTrash} />
                              </View>
             </TouchableOpacity>
         )
@@ -194,6 +192,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  }
+  },
+  renderView: {width: windowWidth/2 -10, height: 150, backgroundColor: 'red', marginHorizontal: 5, borderRadius:15 , backgroundColor: '#2c5c8c', marginBottom: 10},
+  secondView: {flex: 1, flexDirection: 'row-reverse', justifyContent: 'space-between'},
+  itemName: {margin: 5, color: 'whitesmoke', fontWeight: 'bold', fontSize: 30},
+  getlength: {fontSize: 25, color: 'whitesmoke', marginLeft: 25, marginTop: 10},
+  iconTrash: {color:'whitesmoke', flex: 1, flexDirection: 'row', alignSelf: 'flex-start', marginTop:40, paddingHorizontal: 20}
 });
 

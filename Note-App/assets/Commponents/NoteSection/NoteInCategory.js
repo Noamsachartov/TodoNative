@@ -107,22 +107,21 @@ class NoteInCategory extends Component{
       console.log("there is data")
 
       return (
-        <View>
+        <View style={styles.mainView}>
             <ScrollView showsVerticalScrollIndicator ={false}>
-            {/* <SafeAreaView style={{flex: 1}}> */}
-            <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
+            <View style={styles.secondryView}>
            
-                <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>{this.state.CategoryName} Notes</Text>
+                <Text style={styles.CategoryName}>{this.state.CategoryName} Notes</Text>
                
                 <Note needrender={this.isrender} Data={this.state.Get_Note} CategoryName={this.state.CategoryName} />
-                  <View style={{borderColor: "#2c5c8c", borderWidth: 5}}>
-                    <View style={{flex: 1, flexDirection: 'row-reverse'}}>
+                  <View style={styles.thirdmain}>
+                    <View style={styles.fourthMain}>
                         <View>
-                          <Text style={{fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 1}}>Add New Note</Text>
+                          <Text style={styles.newNote}>Add New Note</Text>
                         </View>
                         <View>
                           <TouchableHighlight>
-                          <Icon onPress={this.Add_Note} name="plus" size={80} style={{color:'black', marginRight: 40,  color: '#2c5c8c'}} />
+                          <Icon onPress={this.Add_Note} name="plus" size={80} style={styles.plusIcon} />
                           </TouchableHighlight >
                         </View>
                     </View>
@@ -142,7 +141,6 @@ class NoteInCategory extends Component{
                   <NoteImagesPicker  status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
                 </View>
             </View>
-            {/* </SafeAreaView> */}
             </ScrollView> 
     </View>
   );}
@@ -150,20 +148,22 @@ class NoteInCategory extends Component{
     console.log("there is nooooo data")
     return(
       <View>
-         <View style={{flex: 1, flexDirection: 'column', marginBottom: 250}}>
-           <Text style={{fontSize: 40, marginTop: 10, color: '#2c5c8c'}}>{this.state.CategoryName} Notes</Text>
+           <View style={styles.secondryView}>
+           <Text style={styles.CategoryName}>{this.state.CategoryName} Notes</Text>
+    
            <Note needrender={this.isrender} Data={this.state.Get_Note} CategoryName={this.state.CategoryName} />
-             <View style={{borderColor: "#2c5c8c", borderWidth: 5}}>
-               <View style={{flex: 1, flexDirection: 'row-reverse'}}>
+             <View style={styles.thirdmain}>
+               <View style={styles.fourthMain}>
+                   <View>
+                     <Text style={styles.newNote}>Add New Note</Text>
+                   </View>
                    <View>
                      <TouchableHighlight>
-                     <Icon onPress={this.Add_Note} name="plus" size={70} style={{color:'black', marginRight: 10,  color: '#2c5c8c'}} />
+                     <Icon onPress={this.Add_Note} name="plus" size={80} style={styles.plusIcon} />
                      </TouchableHighlight >
                    </View>
-                   <View>
-                     <Text style={{fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 15}}>Add New Note</Text>
-                   </View>
                </View>
+             
              <TextInput
                placeholder="Type here New Title Item!"
                onChangeText={(Title) => this.setState({Title})}
@@ -176,7 +176,7 @@ class NoteInCategory extends Component{
                value={this.state.Description}
                contentSize={100, 100}
              />
-             <NoteImagesPicker status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
+             <NoteImagesPicker  status={this.isrender}  func = {this.getId2RemoveFromChild} /> 
            </View>
        </View>
       </View>
@@ -189,31 +189,14 @@ class NoteInCategory extends Component{
 
 export default NoteInCategory
 
-// const styles = StyleSheet.create({
-//     base: {width:windowWidth, zIndex: 3,  bottom: 0, position: 'absolute'},
-//     baseTop: {
-//         width: 100,
-//         height: 100,
-//         borderRadius: 100 / 2,
-//         backgroundColor: "#f97171",
-//         top: -110,
-//         left: 130,
-//         position: "absolute",
-//         borderRightColor: "transparent",
-//         borderLeftColor: "transparent",
-//         zIndex: 2,
-//         position: 'absolute', 
-//         bottom: 10
-//       },
-//     baseBottom: {
-//       backgroundColor: "#2c5c8c",
-//       height: 55,
-//       width: windowWidth,
-//       borderTopWidth: 10,
-//       borderTopColor: '#f97171',
-//       zIndex: 0,
-//       position: 'absolute', 
-//       bottom: 0,
-//     },
-// });
+const styles = StyleSheet.create({
+    base: {width:windowWidth, zIndex: 3,  bottom: 0, position: 'absolute'},
+    mainView: {backgroundColor: 'whitesmoke'},
+    secondryView: {flex: 1, flexDirection: 'column', marginBottom: 250},
+    CategoryName: {fontSize: 40, marginTop: 10, color: '#2c5c8c'},
+    thirdmain: {borderColor: "#2c5c8c", borderWidth: 5},
+    fourthMain: {flex: 1, flexDirection: 'row-reverse'},
+    newNote: {fontSize: 30, fontWeight: 'bold', color: '#2c5c8c', marginTop: 15, marginRight: 1},
+    plusIcon: {color:'black', marginRight: 40,  color: '#2c5c8c'}
+});
 

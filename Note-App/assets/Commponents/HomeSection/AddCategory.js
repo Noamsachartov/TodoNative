@@ -54,7 +54,6 @@ save = async (joined) => {
     this._unsubscribe = navigation.addListener('focus', () => {
         this.Load();
     });
-    // this.Load();
 }
 
 Load = async () => {
@@ -74,17 +73,17 @@ Load = async () => {
  render() {
     const { navigation } = this.props;
     return ( <View>
-                <View style={{flex: 1, flexDirection: 'column', justifyContent:'space-between',alignItems: 'center', marginVertical: 20}}>
-                    <View style={{height: 80,width: windowWidth/1.3}} >
+                <View style={styles.mainView}>
+                    <View style={styles.secondView} >
                         <TextInput
-                                style={{ borderWidth: 5,height: 50,paddingRight:10, borderRadius: 10, borderColor: '#2c5c8c'}}
+                                style={styles.inputCategory}
                                 placeholder="Type here Your New Category!"
                                 onChangeText={(Title) => this.setState({Title})}
                                 value={this.state.Title}
                                 contentSize={100, 100}
                             />
                     </View>
-                    <View style={{height: 60,width:windowWidth/2,padding:13,borderRadius:20 ,backgroundColor: '#2c5c8c'}}>
+                    <View style={styles.buttonCategory}>
                         <TouchableOpacity onPress={this.HandlePost} style={styles.appButtonContainer}>
                             <Text style={styles.appButtonText} >Add Crategory</Text>
                         </TouchableOpacity>
@@ -100,9 +99,10 @@ export default AddCategory;
 
 
 const styles = StyleSheet.create({
-    appButtonContainer: {
-    
-    },
+    mainView: {flex: 1, flexDirection: 'column', justifyContent:'space-between',alignItems: 'center', marginVertical: 20},
+    secondView: {height: 80,width: windowWidth/1.3},
+    inputCategory: { borderWidth: 5,height: 50,paddingRight:10, borderRadius: 10, borderColor: '#2c5c8c'},
+    buttonCategory: {height: 60,width:windowWidth/2,padding:13,borderRadius:20 ,backgroundColor: '#2c5c8c'},
     appButtonText: {
       fontSize: 18,
       color: "#fff",
